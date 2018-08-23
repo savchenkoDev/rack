@@ -15,11 +15,6 @@ class App
     200
   end
 
-  def headers
-    { 'Content-Type' => 'text/plain' }
   end
-
-  def body
-    ["Hello Rack!\n"]
   end
 end
