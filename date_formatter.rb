@@ -11,11 +11,20 @@ class DateFormatter
   }.freeze
 
   def initialize(format)
+    @query = format
     @format = ''
-    format.split('-').each { |elem| @format += FORMAT_CONVERSION[elem] + '-' }
+    @query.split('-').each { |elem| @format += "#{FORMAT_CONVERSION[elem]}-" }
   end
 
-  def call
+  def result
     Time.now.strftime(@format).chop! + "\r\n"
+  end
+
+  def result_success?
+    errors.empty?
+  end
+
+  def errors
+    @query.split('-').reject { |e| FORMAT_LIST.include?(e) }
   end
 end
